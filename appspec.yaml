@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: .
+    destination: /home/ec2-user/httpbin
+hooks:
+  AfterInstall:
+    - location: scripts/start_httpbin.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/stop_httpbin.sh
+      timeout: 180
+      runas: ec2-user

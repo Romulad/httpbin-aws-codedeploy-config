@@ -1,0 +1,20 @@
+# Ignore Docker artifacts
+*.pid
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore CodeDeploy logs
+codedeploy-agent.log
+
+# Ignore zip archives
+*.zip
+
+# Ignore editor files
+*.swp
+*.swo
+
+# Ignore scripts output
+output/

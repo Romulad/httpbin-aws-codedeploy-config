@@ -28,17 +28,17 @@ if ! pgrep -x "dockerd" > /dev/null; then
 fi
 
 # Stop any running httpbin container
-if [ "$(docker ps -q -f name=httpbin)" ]; then
+if [ "$(sudo docker ps -q -f name=httpbin)" ]; then
     echo "Stopping existing httpbin container..."
-    docker stop httpbin || true
-    docker rm httpbin || true
+    sudo docker stop httpbin || true
+    sudo docker rm httpbin || true
 fi
 
 # Pull latest image
-docker pull kennethreitz/httpbin
+sudo docker pull kennethreitz/httpbin
 
 # Start httpbin container
-docker run -d --name httpbin -p 80:80 kennethreitz/httpbin || {
+sudo docker run -d --name httpbin -p 80:80 kennethreitz/httpbin || {
     echo "Failed to start httpbin container. Checking for port conflicts..."
     if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null ; then
         echo "Port 80 is in use. Please free the port and retry."
@@ -56,5 +56,5 @@ for i in {1..10}; do
     fi
 done
 echo "httpbin did not start successfully. Check Docker logs."
-docker logs httpbin
+sudo docker logs httpbin
 exit 3
